@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+@import "tailwindcss";
+@tailwind utilities;
+
+@font-face {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+}
+
+.custom-button {
+  background-color: #4ca696 !important;
+  color: white !important;
+  border: none;
+  padding: 15px;
+}
+
+.custom-button:hover {
+  background-color: #3b907e !important;
+}
+
+.button-bg {
+  background-color: #4ca696 !important;
+  border: none !important;
+}
