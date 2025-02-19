@@ -6,8 +6,8 @@ import { Member } from "./interface";
 const fetchMembers = async () => {
   return await crudRequest({
     method: "GET",
-    url: "https://mocki.io/v1/bcde6ec0-7b6d-43d2-a564-2e980aff7fa3",
-    // url: `${API_BASE_URL}/members`,
+    // url: "https://mocki.io/v1/bcde6ec0-7b6d-43d2-a564-2e980aff7fa3",
+    url: `${API_BASE_URL}/members`,
   });
 };
 

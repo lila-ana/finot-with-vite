@@ -5,9 +5,16 @@ import { Member } from "../../../../../store/server/member/interface";
 import { Link } from "react-router";
 import { FaEye } from "react-icons/fa";
 import { Pencil, Trash2 } from "lucide-react";
+import { useSendAttendance } from "../../../../../store/server/attendance/mutation";
 
+enum AttendanceStatus {
+  PRESENT = "Present",
+  ABSENT = "Absent",
+}
 const MembersTable: React.FC = () => {
   const { data: memberData, isLoading: responseLoading } = useGetMembers();
+  console.log(memberData, "memberData");
+  const { mutate: sendAttendance } = useSendAttendance();
 
   const columns: TableColumnsType<Member> = [
     {
@@ -29,6 +36,14 @@ const MembersTable: React.FC = () => {
       dataIndex: "gender",
     },
     {
+      title: "Blood Type",
+      dataIndex: "blood_type",
+    },
+    {
+      title: "Attendance",
+      dataIndex: "attendance",
+    },
+    {
       title: "View Profile",
       dataIndex: "view_profile",
     },
@@ -38,14 +53,29 @@ const MembersTable: React.FC = () => {
     },
   ];
 
-  const membersTableData = memberData?.map((item: any) => ({
+  const handleStageChange = (value: string, memberId: string) => {
+    console.log(value, memberId, "value this");
+    sendAttendance({
+      userId: memberId,
+      status: value === "Present" ? true : false,
+
+      // member_id: selectedMember?.member_id,
+      // elder_id: selectedMember?.elder?.elder_id,
+      // class_id: selectedMember?.class?.class_id,
+      // attended: value === "Present" ? true : false,
+    });
+  };
+
+  console.log(memberData, "memberData");
+  const membersTableData = memberData?.items?.map((item: any) => ({
     key: item?.member_id ?? "unknown",
     id: item?.unique_identifier ?? "unknown",
     full_name: item?.full_name ?? "unknown",
     phone_number: item?.phone_number ?? "unknown",
     gender: item?.gender ?? "unknown",
+    blood_type: item?.blood_type ?? "unknown",
     view_profile: (
-      <Link to={`members/${item?.id}`}>
+      <Link to={`${item?.member_id}`}>
         <Button
           id={`viewProfileButton${item?.id}`}
           className="bg-sky-600 px-[10px] text-white disabled:bg-gray-400 border-none"
@@ -55,20 +85,22 @@ const MembersTable: React.FC = () => {
         </Button>
       </Link>
     ),
+    attendance: (
+      <Select
+        placeholder="Status"
+        allowClear
+        onChange={(value) => handleStageChange(value, item?.id)}
+      >
+        {AttendanceStatus &&
+          Object?.values(AttendanceStatus).map((type) => (
+            <Select.Option key={type} value={type}>
+              {type}
+            </Select.Option>
+          ))}
+      </Select>
+    ),
     action: (
       <div className="flex gap-2">
-        {/* <Select
-          placeholder="Status"
-          allowClear
-          onChange={(value) => handleStageChange(value, item?.id)}
-        >
-          {AttendanceStatus &&
-            Object?.values(AttendanceStatus).map((type) => (
-              <Select.Option key={type} value={type}>
-                {type}
-              </Select.Option>
-            ))}
-        </Select> */}
         <div className="flex items-center justify-center gap-2">
           <div className="bg-[#4ca696] w-7 h-7 rounded-md flex items-center justify-center">
             <Pencil

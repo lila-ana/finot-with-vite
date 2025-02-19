@@ -1,16 +1,35 @@
-import { Col, DatePicker, Form, Radio, Row, Select } from "antd";
+import { Button, Col, DatePicker, Form, Radio, Row, Select } from "antd";
 import React from "react";
 import CustomDrawerLayout from "../../../../../components/customDrawer";
 import CustomDrawerHeader from "../../../../../components/customDrawer/customDrawerHeader";
-import { useMemberStore } from "../../../../../store/ui/member";
 import Input from "antd/es/input/Input";
 import TextArea from "antd/es/input/TextArea";
+import { useMemberStore } from "../../../../../store/ui/member";
+import { useCreateMembers } from "../../../../../store/server/member/mutation";
 
 const MemberDrawer: React.FC = () => {
+  const [form] = Form.useForm();
   const { openDrawer, setOpenDrawer } = useMemberStore();
+
+  const { mutate: createMember, isPending: createPending } = useCreateMembers();
 
   const handleClose = () => {
     setOpenDrawer(false);
+  };
+  const handleSubmit = () => {
+    const formValues = form.getFieldsValue();
+    const formattedValues = {
+      data: formValues,
+    };
+
+    console.log("Received values of form: ", formattedValues, formValues);
+
+    createMember(formValues, {
+      onSuccess: () => {
+        form.resetFields();
+        setOpenDrawer(false);
+      },
+    });
   };
 
   return (
@@ -25,7 +44,7 @@ const MemberDrawer: React.FC = () => {
       footer={null}
       width="600px"
     >
-      <Form layout="vertical">
+      <Form layout="vertical" form={form} onFinish={handleSubmit}>
         <Row gutter={[16, 5]}>
           <Col xs={24} sm={24} md={24} lg={16} xl={16}>
             <Form.Item
@@ -219,7 +238,7 @@ const MemberDrawer: React.FC = () => {
               name="elder_id"
               rules={[
                 {
-                  required: true,
+                  // required: true,
                   message: "Please select your class Elder ",
                 },
               ]}
@@ -243,7 +262,7 @@ const MemberDrawer: React.FC = () => {
               name="class_id"
               rules={[
                 {
-                  required: true,
+                  // required: true,
                   message: "Please select your current class ",
                 },
               ]}
@@ -339,6 +358,28 @@ const MemberDrawer: React.FC = () => {
           ]}
         >
           <Input />
+        </Form.Item>
+        <Form.Item
+          label={
+            <span className="text-sm font-semibold text-gray-700">
+              Emergency Contact Relation
+            </span>
+          }
+          name="emergency_contact_relation"
+          rules={[
+            {
+              required: true,
+              message:
+                "Please enter your relation with the emergency contact person",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item>
+          <Button htmlType="submit" type="primary">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     </CustomDrawerLayout>

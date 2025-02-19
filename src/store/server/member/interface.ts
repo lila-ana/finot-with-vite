@@ -8,6 +8,7 @@ export interface Member {
   phone_number: string;
   email_address: string;
   membership_status: "active" | "inactive";
+  profession_detail: string;
   date_of_baptism: string;
   elder_id: string;
   class_id: string;
@@ -18,6 +19,9 @@ export interface Member {
   spiritual_gifts: string;
   emergency_contact_name: string;
   emergency_contact_phone: string;
+  emergency_contact_relation: string;
+  updated_at: Date;
+  class_name?: string;
 }
 
 export type Members = Member[];

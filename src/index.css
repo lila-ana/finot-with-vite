@@ -25,3 +25,20 @@
   background-color: #4ca696 !important;
   border: none !important;
 }
+.custom-white-button {
+  color: #4ca696;
+  border: #4ca696;
+  padding: 15px;
+  border: #4ca696 1px solid;
+}
+
+.custom-cancel {
+  background: gray;
+  padding: 15px;
+  border: none !important;
+}
+
+.custom-cancel-bg {
+  background-color: gray !important;
+  border: none !important;
+}
