@@ -159,7 +159,7 @@ const EventForm: React.FC = () => {
           >
             <Upload
               beforeUpload={() => false}
-              onChange={({ file, fileList }) => {
+              onChange={({ fileList }) => {
                 form.setFieldsValue({ image: fileList });
               }}
               maxCount={1}

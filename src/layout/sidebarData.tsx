@@ -23,11 +23,18 @@ export const SidebarData: MenuItem[] = [
     label: "Dashboard",
   },
   {
+    key: "attendance",
+    icon: <Users size={18} />,
+    path: "attendance",
+    label: "Attendance",
+  },
+  {
     key: "member",
     icon: <Users size={18} />,
     path: "members",
     label: "Members",
   },
+
   {
     key: "elder",
     icon: <MdElderly size={18} />,

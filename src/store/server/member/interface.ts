@@ -13,6 +13,7 @@ export interface Member {
   elder_id: string;
   class_id: string;
   previous_church_affiliation: string;
+  profileImage: string;
   family_members: string;
   children_info: string;
   areas_of_interest: string;

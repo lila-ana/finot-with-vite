@@ -8,22 +8,39 @@ import Class from "./pages/afterLogin/class";
 import Elders from "./pages/afterLogin/elders";
 import Settings from "./pages/afterLogin/settings";
 import Login from "./pages/beforeLogin/auth";
+import Attendance from "./pages/afterLogin/attendance";
 // import MembersProfile from "./pages/afterLogin/members/_components/memberProfile";
 
 function App() {
+  const token = localStorage.getItem("access_token");
+
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard/landing" element={<DashBoard />} />
-        <Route path="/dashboard/about" element={<About />} />
-        <Route path="/dashboard/members" element={<Members />} />
-        {/* <Route path="/dashboard/members/:id" element={<MembersProfile />} /> */}
-        <Route path="/dashboard/events" element={<Events />} />
-        <Route path="/dashboard/classes" element={<Class />} />
-        <Route path="/dashboard/elders" element={<Elders />} />
-        <Route path="/dashboard/settings" element={<Settings />} />
+        {/* {token ? ( */}
+        <>
+          <Route path="/dashboard/landing" element={<DashBoard />} />
+          <Route path="/dashboard/about" element={<About />} />
+          <Route path="/dashboard/members" element={<Members />} />
+          <Route path="/dashboard/attendance" element={<Attendance />} />
+          {/* <Route path="/dashboard/members/:id" element={<MembersProfile />} /> */}
+          <Route path="/dashboard/events" element={<Events />} />
+          <Route path="/dashboard/classes" element={<Class />} />
+          <Route path="/dashboard/elders" element={<Elders />} />
+          <Route path="/dashboard/settings" element={<Settings />} />
+        </>
+        {/* ) : ( */}
+        <Route
+          path="*"
+          element={
+            <div className="flex items-center justify-center h-screen text-2xl font-extrabold text-[#4ca696]">
+              Page not found
+            </div>
+          }
+        />
+        {/* )} */}
       </Routes>
     </Router>
   );
