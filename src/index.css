@@ -33,13 +33,17 @@
 }
 
 .custom-cancel {
-  background: gray;
+  background: rgb(233, 230, 230);
   padding: 15px;
   border: none !important;
 }
+.custom-cancel:hover {
+  background-color: rgb(211, 209, 209) !important;
+  color: black !important;
+}
 
 .custom-cancel-bg {
-  background-color: gray !important;
+  background-color: rgb(211, 209, 209) !important;
   border: none !important;
 }
 

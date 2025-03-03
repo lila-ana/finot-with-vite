@@ -9,6 +9,7 @@ import Elders from "./pages/afterLogin/elders";
 import Settings from "./pages/afterLogin/settings";
 import Login from "./pages/beforeLogin/auth";
 import Attendance from "./pages/afterLogin/attendance";
+import PageNotFound from "./components/pageNotFound";
 // import MembersProfile from "./pages/afterLogin/members/_components/memberProfile";
 
 function App() {
@@ -32,14 +33,7 @@ function App() {
           <Route path="/dashboard/settings" element={<Settings />} />
         </>
         {/* ) : ( */}
-        <Route
-          path="*"
-          element={
-            <div className="flex items-center justify-center h-screen text-2xl font-extrabold text-[#4ca696]">
-              Page not found
-            </div>
-          }
-        />
+        <Route path="*" element={<PageNotFound />} />
         {/* )} */}
       </Routes>
     </Router>
