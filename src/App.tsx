@@ -13,7 +13,7 @@ import PageNotFound from "./components/pageNotFound";
 // import MembersProfile from "./pages/afterLogin/members/_components/memberProfile";
 
 function App() {
-  const token = localStorage.getItem("access_token");
+  // const token = localStorage.getItem("access_token");
 
   return (
     <Router>
