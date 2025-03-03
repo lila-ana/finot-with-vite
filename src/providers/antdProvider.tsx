@@ -32,6 +32,11 @@ const AntdConfigProvider = ({ children }: { children: React.ReactNode }) => {
             colorPrimaryHover: "#3b907e",
             colorPrimaryActive: "#367d6d",
           },
+          Tabs: {
+            itemActiveColor: "#4ca696", // Active tab color
+            itemHoverColor: "#367d6d", // Hover color
+            inkBarColor: "#367d6d", // Underline color
+          },
           Select: {
             colorText: "#111827",
             colorBorder: "#E9EAEC",
@@ -39,6 +44,13 @@ const AntdConfigProvider = ({ children }: { children: React.ReactNode }) => {
           Collapse: {
             headerBg: "#FFF",
             contentBg: "FFF",
+          },
+          Switch: {
+            colorPrimary: "#4ca696",
+          },
+          Radio: {
+            colorPrimary: "#4ca696", // Changes selected radio color
+            colorPrimaryHover: "#4ca696", // Changes hover color
           },
         },
         token: {

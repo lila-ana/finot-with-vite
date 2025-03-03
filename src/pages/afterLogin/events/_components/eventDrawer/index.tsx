@@ -10,7 +10,6 @@ import {
   Upload,
 } from "antd";
 import dayjs from "dayjs";
-
 import TextArea from "antd/es/input/TextArea";
 import { UploadOutlined } from "@ant-design/icons";
 import {
@@ -50,10 +49,12 @@ const EventForm: React.FC = () => {
     formData.append("location", values.location);
     formData.append("description", values.description);
 
+    // Handle image upload if present
     if (values.image) {
       formData.append("image", values.image.file.originFileObj);
     }
 
+    // Update or create the event
     if (selectedEventId) {
       updateEvent({ id: selectedEventId, data: formData });
     } else {
@@ -68,8 +69,6 @@ const EventForm: React.FC = () => {
       {selectedEventId ? "Edit Event" : "Create Event"}
     </div>
   );
-
-  console.log(openDrawer, "openDrawer");
 
   return (
     openDrawer && (
@@ -88,10 +87,17 @@ const EventForm: React.FC = () => {
                 Event Name
               </span>
             }
-            rules={[{ required: true }]}
+            rules={[
+              { required: true, message: "Event name is required" },
+              {
+                max: 255,
+                message: "Event name cannot be longer than 255 characters",
+              },
+            ]}
           >
             <Input placeholder="Enter event name" />
           </Form.Item>
+
           <Row gutter={[16, 8]}>
             <Col xs={24} sm={24} md={24} lg={24} xl={12}>
               <Form.Item
@@ -108,6 +114,7 @@ const EventForm: React.FC = () => {
                 <DatePicker className="w-full" />
               </Form.Item>
             </Col>
+
             <Col xs={24} sm={24} md={24} lg={12} xl={12}>
               <Form.Item
                 name="event_time"
@@ -133,11 +140,15 @@ const EventForm: React.FC = () => {
               </span>
             }
             rules={[
-              { required: true, message: "Please enter a valid location" },
+              {
+                max: 255,
+                message: "Location cannot be longer than 255 characters",
+              },
             ]}
           >
             <Input placeholder="Enter location" />
           </Form.Item>
+
           <Form.Item
             name="description"
             label={
@@ -145,9 +156,16 @@ const EventForm: React.FC = () => {
                 Description
               </span>
             }
+            rules={[
+              {
+                max: 500,
+                message: "Description cannot be longer than 500 characters",
+              },
+            ]}
           >
             <TextArea rows={4} placeholder="Enter event description here" />
           </Form.Item>
+
           <Form.Item
             name="image"
             label={
@@ -159,31 +177,27 @@ const EventForm: React.FC = () => {
           >
             <Upload
               beforeUpload={() => false}
-              onChange={({ fileList }) => {
-                form.setFieldsValue({ image: fileList });
-              }}
+              onChange={({ fileList }) =>
+                form.setFieldsValue({ image: fileList })
+              }
               maxCount={1}
               showUploadList={false}
             >
               <Button icon={<UploadOutlined />}>Upload</Button>
             </Upload>
           </Form.Item>
+
           <Form.Item>
             <div className="flex justify-center w-full bg-[#fff] px-9 py-6 gap-6">
               <Button
-                ghost
-                id="CloseDrawer"
+                // ghost
                 onClick={() => setOpenDrawer(false)}
                 className="custom-cancel"
               >
                 Close
               </Button>
-              <Button
-                className="custom-button"
-                id="create_member"
-                htmlType="submit"
-              >
-                {currentEvent ? "Update" : "Create"}
+              <Button className="custom-button" htmlType="submit">
+                {selectedEventId ? "Update" : "Create"}
               </Button>
             </div>
           </Form.Item>

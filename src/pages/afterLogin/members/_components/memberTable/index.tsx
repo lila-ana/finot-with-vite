@@ -5,7 +5,7 @@ import { Member } from "../../../../../store/server/member/interface";
 import { Link } from "react-router";
 import { FaEye } from "react-icons/fa";
 import { Pencil, Trash2 } from "lucide-react";
-import { useSendAttendance } from "../../../../../store/server/attendance/mutation";
+// import { useSendAttendance } from "../../../../../store/server/attendance/mutation";
 
 enum AttendanceStatus {
   PRESENT = "Present",
@@ -14,7 +14,7 @@ enum AttendanceStatus {
 const MembersTable: React.FC = () => {
   const { data: memberData, isLoading: responseLoading } = useGetMembers();
   console.log(memberData, "memberData");
-  const { mutate: sendAttendance } = useSendAttendance();
+  // const { mutate: sendAttendance } = useSendAttendance();
 
   const columns: TableColumnsType<Member> = [
     {
@@ -32,16 +32,16 @@ const MembersTable: React.FC = () => {
       dataIndex: "phone_number",
     },
     {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
       title: "Gender",
       dataIndex: "gender",
     },
     {
       title: "Blood Type",
       dataIndex: "blood_type",
-    },
-    {
-      title: "Attendance",
-      dataIndex: "attendance",
     },
     {
       title: "View Profile",
@@ -53,18 +53,18 @@ const MembersTable: React.FC = () => {
     },
   ];
 
-  const handleStageChange = (value: string, memberId: string) => {
-    console.log(value, memberId, "value this");
-    sendAttendance({
-      userId: memberId,
-      status: value === "Present" ? true : false,
+  // const handleStageChange = (value: string, memberId: string) => {
+  //   console.log(value, memberId, "value this");
+  //   sendAttendance({
+  //     userId: memberId,
+  //     status: value === "Present" ? true : false,
 
-      // member_id: selectedMember?.member_id,
-      // elder_id: selectedMember?.elder?.elder_id,
-      // class_id: selectedMember?.class?.class_id,
-      // attended: value === "Present" ? true : false,
-    });
-  };
+  //     // member_id: selectedMember?.member_id,
+  //     // elder_id: selectedMember?.elder?.elder_id,
+  //     // class_id: selectedMember?.class?.class_id,
+  //     // attended: value === "Present" ? true : false,
+  //   });
+  // };
 
   console.log(memberData, "memberData");
   const membersTableData = memberData?.items?.map((item: any) => ({
@@ -72,6 +72,7 @@ const MembersTable: React.FC = () => {
     id: item?.unique_identifier ?? "unknown",
     full_name: item?.full_name ?? "unknown",
     phone_number: item?.phone_number ?? "unknown",
+    email: item?.email_address ?? "unknown",
     gender: item?.gender ?? "unknown",
     blood_type: item?.blood_type ?? "unknown",
     view_profile: (
@@ -84,20 +85,6 @@ const MembersTable: React.FC = () => {
           <span className="text-xs font-normal">View profile</span>
         </Button>
       </Link>
-    ),
-    attendance: (
-      <Select
-        placeholder="Status"
-        allowClear
-        onChange={(value) => handleStageChange(value, item?.id)}
-      >
-        {AttendanceStatus &&
-          Object?.values(AttendanceStatus).map((type) => (
-            <Select.Option key={type} value={type}>
-              {type}
-            </Select.Option>
-          ))}
-      </Select>
     ),
     action: (
       <div className="flex gap-2">
@@ -126,6 +113,7 @@ const MembersTable: React.FC = () => {
         columns={columns}
         dataSource={membersTableData}
         loading={responseLoading}
+        // pagination={8}
       />
     </div>
   );

@@ -33,12 +33,71 @@
 }
 
 .custom-cancel {
-  background: gray;
+  background: rgb(233, 230, 230);
   padding: 15px;
   border: none !important;
 }
+.custom-cancel:hover {
+  background-color: rgb(211, 209, 209) !important;
+  color: black !important;
+}
 
 .custom-cancel-bg {
-  background-color: gray !important;
+  background-color: rgb(211, 209, 209) !important;
   border: none !important;
+}
+
+/* Change active tab text color */
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #4ca696 !important;
+  font-weight: bold;
+}
+
+/* Change active tab underline (ink bar) */
+.ant-tabs-ink-bar {
+  background-color: #4ca696 !important;
+}
+
+.ant-select-selector {
+  border: 1px solid #4ca696 !important; /* Change border */
+}
+
+.ant-select-focused .ant-select-selector {
+  border-color: #4ca696 !important; /* Change border color on focus */
+}
+
+.custom-switch.ant-switch-checked {
+  background-color: #4ca696 !important;
+}
+
+.custom-switch {
+  background-color: #4ca696 !important;
+}
+
+/* Change the default border */
+.ant-radio-wrapper .ant-radio {
+  border: 1px solid #4ca696 !important;
+}
+
+/* Change border color on hover */
+.ant-radio-wrapper:hover .ant-radio {
+  border-color: #4ca696 !important;
+}
+
+/* Change border color when checked */
+.ant-radio-checked .ant-radio-inner {
+  border-color: #4ca696 !important;
+}
+
+/* Change the background color when checked */
+.ant-radio-checked .ant-radio-inner::after {
+  background-color: #4ca696 !important;
+}
+
+.ant-radio-inner::after {
+  background-color: #4ca696 !important;
+}
+
+.ant-switch:hover {
+  background-color: #3b907e !important;
 }

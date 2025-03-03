@@ -79,17 +79,17 @@ const DashBoardEventCard: React.FC = () => {
     );
   return (
     <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-wrap -m-4">
-          <Row gutter={[16, 16]}>
-            {events?.map((item: any, index: number) => (
-              <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-                <EventCards key={index} {...item} />
-              </Col>
-            ))}
-          </Row>
-        </div>
-      </div>
+      {/* <div className="container px-5 py-24 mx-auto"> */}
+      {/* <div className="flex flex-wrap -m-4"> */}
+      <Row gutter={[16, 16]}>
+        {events?.map((item: any, index: number) => (
+          <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+            <EventCards key={index} {...item} />
+          </Col>
+        ))}
+      </Row>
+      {/* </div> */}
+      {/* </div> */}
     </section>
   );
 };
