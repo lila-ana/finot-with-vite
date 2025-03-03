@@ -11,7 +11,7 @@ const MemberDrawer: React.FC = () => {
   const [form] = Form.useForm();
   const { openDrawer, setOpenDrawer } = useMemberStore();
 
-  const { mutate: createMember, isPending: createPending } = useCreateMembers();
+  const { mutate: createMember } = useCreateMembers();
 
   const handleClose = () => {
     setOpenDrawer(false);

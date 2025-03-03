@@ -11,7 +11,7 @@ const ImportMemberDrawer: React.FC = () => {
   const [form] = Form.useForm();
   const { openImportDrawer, setImportDrawer, file, setFile } = useMemberStore();
 
-  const { mutate: submitImportedData, isPending: submitMemberLoading } =
+  const { mutate: submitImportedData } =
     useImportMembers();
 
   const handleClose = () => {
