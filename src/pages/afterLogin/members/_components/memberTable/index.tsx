@@ -1,4 +1,4 @@
-import { Button, Select, Table, TableColumnsType } from "antd";
+import { Button, Table, TableColumnsType } from "antd";
 import React from "react";
 import { useGetMembers } from "../../../../../store/server/member/queries";
 import { Member } from "../../../../../store/server/member/interface";
@@ -7,10 +7,10 @@ import { FaEye } from "react-icons/fa";
 import { Pencil, Trash2 } from "lucide-react";
 // import { useSendAttendance } from "../../../../../store/server/attendance/mutation";
 
-enum AttendanceStatus {
-  PRESENT = "Present",
-  ABSENT = "Absent",
-}
+// enum AttendanceStatus {
+//   PRESENT = "Present",
+//   ABSENT = "Absent",
+// }
 const MembersTable: React.FC = () => {
   const { data: memberData, isLoading: responseLoading } = useGetMembers();
   console.log(memberData, "memberData");

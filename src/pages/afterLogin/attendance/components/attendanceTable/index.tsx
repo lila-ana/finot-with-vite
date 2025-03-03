@@ -28,7 +28,7 @@ const AttendanceTable: React.FC = () => {
     setAttendance,
     setCurrent,
     setPageSize,
-    validateAttendance,
+    // validateAttendance,
   } = useAttendanceStore();
 
   const { data: memberAttendance, isLoading: responseLoading } =
@@ -134,7 +134,7 @@ const AttendanceTable: React.FC = () => {
 
   const rowSelection: TableProps<MemberDataType>["rowSelection"] = {
     onChange: (
-      selectedRowKeys: React.Key[],
+      _: React.Key[],
       selectedRows: MemberDataType[]
     ) => {
       // Track which users are selected and their attendance status

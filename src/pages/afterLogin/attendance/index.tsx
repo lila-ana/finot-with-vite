@@ -4,9 +4,9 @@ import Layout from "../../../layout";
 import AttendanceTable from "./components/attendanceTable";
 
 const Attendance: React.FC = () => {
-  const handleOpen = () => {
-    // TODO: Implement drawer to create member
-  };
+  // const handleOpen = () => {
+  //   // TODO: Implement drawer to create member
+  // };
 
   return (
     <Layout dashboardProps={"Attendance"}>
