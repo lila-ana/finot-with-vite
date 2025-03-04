@@ -11,13 +11,13 @@ const markAttendance = async (data: MarkAttendancePayload) => {
     data,
   });
 };
-const updateAttendance = async (data: MarkAttendancePayload) => {
-  return await crudRequest({
-    method: "PUT",
-    url: `${API_BASE_URL}/attendances/${data?.member_id}`,
-    data,
-  });
-};
+// const updateAttendance = async (data: MarkAttendancePayload) => {
+//   return await crudRequest({
+//     method: "PUT",
+//     url: `${API_BASE_URL}/attendances/${data?.member_id}`,
+//     data,
+//   });
+// };
 
 export const useMarkAttendance = () => {
   const queryClient = useQueryClient();

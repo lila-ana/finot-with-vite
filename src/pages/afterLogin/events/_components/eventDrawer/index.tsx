@@ -22,7 +22,7 @@ import CustomDrawerLayout from "../../../../../components/customDrawer";
 
 const EventForm: React.FC = () => {
   const [form] = Form.useForm();
-  const { openDrawer, selectedEventId, currentEvent, setOpenDrawer } =
+  const { openDrawer, selectedEventId, setOpenDrawer } =
     useEventStore();
   const { mutate: createEvent } = useCreateEvents();
   const { mutate: updateEvent } = useUpdateEvents();
