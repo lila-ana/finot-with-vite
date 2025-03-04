@@ -26,7 +26,7 @@ export const useGetMembers = () => {
   });
 };
 export const useGetMemberById = (memberId: string) => {
-  return useQuery<Member>({
+  return useQuery<any>({
     queryKey: ["candidate", memberId],
     queryFn: () => fetchMemberById(memberId),
   });

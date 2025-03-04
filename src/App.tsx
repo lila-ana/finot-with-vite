@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Home from "./pages/beforeLogin/home";
 import DashBoard from "./pages/afterLogin/dashboard";
 import About from "./pages/beforeLogin/about";
@@ -18,8 +23,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* Protected Routes */}
         {token ? (
           <>
             <Route path="/dashboard/landing" element={<DashBoard />} />
@@ -31,9 +39,14 @@ function App() {
             <Route path="/dashboard/classes" element={<Class />} />
             <Route path="/dashboard/elders" element={<Elders />} />
             <Route path="/dashboard/settings" element={<Settings />} />
+            {/* Catch-all for authenticated users */}
+            <Route path="*" element={<PageNotFound />} />
           </>
         ) : (
-          <Route path="*" element={<PageNotFound />} />
+          <>
+            {/* Redirect unknown routes to Home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </>
         )}
       </Routes>
     </Router>
