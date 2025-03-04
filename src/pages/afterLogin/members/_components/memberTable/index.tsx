@@ -1,20 +1,16 @@
-import { Button, Select, Table, TableColumnsType } from "antd";
+import { Button, Table, TableColumnsType } from "antd";
 import React from "react";
 import { useGetMembers } from "../../../../../store/server/member/queries";
 import { Member } from "../../../../../store/server/member/interface";
 import { Link } from "react-router";
 import { FaEye } from "react-icons/fa";
 import { Pencil, Trash2 } from "lucide-react";
-// import { useSendAttendance } from "../../../../../store/server/attendance/mutation";
+import { useMemberStore } from "../../../../../store/ui/member";
 
-enum AttendanceStatus {
-  PRESENT = "Present",
-  ABSENT = "Absent",
-}
 const MembersTable: React.FC = () => {
   const { data: memberData, isLoading: responseLoading } = useGetMembers();
-  console.log(memberData, "memberData");
-  // const { mutate: sendAttendance } = useSendAttendance();
+
+  const { current, pageSize, setCurrent, setPageSize } = useMemberStore();
 
   const columns: TableColumnsType<Member> = [
     {
@@ -53,20 +49,6 @@ const MembersTable: React.FC = () => {
     },
   ];
 
-  // const handleStageChange = (value: string, memberId: string) => {
-  //   console.log(value, memberId, "value this");
-  //   sendAttendance({
-  //     userId: memberId,
-  //     status: value === "Present" ? true : false,
-
-  //     // member_id: selectedMember?.member_id,
-  //     // elder_id: selectedMember?.elder?.elder_id,
-  //     // class_id: selectedMember?.class?.class_id,
-  //     // attended: value === "Present" ? true : false,
-  //   });
-  // };
-
-  console.log(memberData, "memberData");
   const membersTableData = memberData?.items?.map((item: any) => ({
     key: item?.member_id ?? "unknown",
     id: item?.unique_identifier ?? "unknown",
@@ -76,9 +58,9 @@ const MembersTable: React.FC = () => {
     gender: item?.gender ?? "unknown",
     blood_type: item?.blood_type ?? "unknown",
     view_profile: (
-      <Link to={`${item?.member_id}`}>
+      <Link to={`/dashboard/members/${item?.member_id}`}>
         <Button
-          id={`viewProfileButton${item?.id}`}
+          id={`viewProfileButton${item?.member_id}`}
           className="bg-sky-600 px-[10px] text-white disabled:bg-gray-400 border-none"
         >
           <FaEye />
@@ -107,13 +89,29 @@ const MembersTable: React.FC = () => {
       </div>
     ),
   }));
+
+  const onPageChange = (page: number, pageSize?: number) => {
+    setCurrent(page);
+    if (pageSize) {
+      setPageSize(pageSize);
+    }
+  };
+
   return (
     <div className="mt-5">
       <Table
         columns={columns}
         dataSource={membersTableData}
         loading={responseLoading}
-        // pagination={8}
+        pagination={{
+          total: memberData?.meta?.totalPages,
+          current: current,
+          pageSize: pageSize,
+          onChange: onPageChange,
+          showSizeChanger: true,
+          onShowSizeChange: onPageChange,
+        }}
+        scroll={{ x: 1000 }}
       />
     </div>
   );
